@@ -1,0 +1,184 @@
+# encoding: utf-8
+
+module Assembla
+  class Client::Activity::Notifications < API
+
+    # List your notifications
+    #
+    # List all notifications for the current user, grouped by repository.
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#list-your-notifications
+    #
+    # @param [Hash] params
+    # @option params [Boolean] :all
+    #   If true, show notifications marked as read.
+    #   Default: false
+    # @option params [Boolean] :participating
+    #   If true, only shows notifications in which the user
+    #   is directly participating or mentioned. Default: false
+    # @option params [String] :since
+    #   Filters out any notifications updated before the given time.
+    #   This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+    #   Default: Time.now
+    #
+    # @example
+    #   assembla = Assembla.new oauth_token: 'token'
+    #   assembla.activity.notifications.list
+    #
+    # List your notifications in a repository
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#list-your-notifications-in-a-repository
+    #
+    # @example
+    #  assembla = Assembla.new
+    #  assembla.activity.notifications.list user: 'user-name', repo: 'repo-name'
+    #
+    # @api public
+    def list(*args)
+      arguments(args) do
+        permit %w[ all participating since user repo]
+      end
+      params = arguments.params
+
+      response = if ( (user_name = params.delete("user")) &&
+                      (repo_name = params.delete("repo")) )
+        get_request("/repos/#{user_name}/#{repo_name}/notifications", params)
+      else
+        get_request("/notifications", params)
+      end
+      return response unless block_given?
+      response.each { |el| yield el }
+    end
+    alias :all :list
+
+    # View a single thread
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#view-a-single-thread
+    #
+    # @example
+    #  assembla = Assembla.new oauth_token: 'token'
+    #  assembla.activity.notifications.get 'thread_id'
+    #  assembla.activity.notifications.get 'thread_id' { |thread| ... }
+    #
+    # @api public
+    def get(*args)
+      arguments(args, required: [:id])
+
+      response = get_request("/notifications/threads/#{arguments.id}", arguments.params)
+      return response unless block_given?
+      response.each { |el| yield el }
+    end
+    alias :find :get
+
+    # Mark as read
+    #
+    # Marking a notification as “read” removes it from the default view on Assembla.com.
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#mark-as-read
+    #
+    # @param [Hash] params
+    # @option params [String] :last_read_at
+    #   Describes the last point that notifications were checked.
+    #   Anything updated since this time will not be updated.
+    #   This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.
+    #   Default: Time.now
+    #
+    # @example
+    #  assembla = Assembla.new oauth_token: 'token'
+    #  assembla.activity.notifications.mark
+    #
+    # Mark notifications as read in a repository
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository
+    #
+    # @example
+    #  assembla.activity.notifications.mark user: 'user-name', repo: 'repo-name'
+    #
+    # Mark a thread as read
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#mark-a-thread-as-read
+    #
+    # @example
+    #  assembla.activity.notifications.mark id: 'thread-id'
+    #
+    # @api public
+    def mark(*args)
+      arguments(args) do
+        permit %w[ unread read last_read_at user repo id]
+      end
+      params = arguments.params
+
+      if ( (user_name = params.delete("user")) &&
+           (repo_name = params.delete("repo")) )
+
+        put_request("/repos/#{user_name}/#{repo_name}/notifications", params)
+      elsif (thread_id = params.delete("id"))
+        patch_request("/notifications/threads/#{thread_id}", params)
+      else
+        put_request("/notifications", params)
+      end
+    end
+
+    # Check to see if the current user is subscribed to a thread.
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#get-a-thread-subscription
+    #
+    # @example
+    #  assembla = Assembla.new oauth_token: 'token'
+    #  assembla.activity.notifications.subscribed? 'thread-id'
+    #
+    # @example
+    #   assembla.activity.notifications.subscribed? id: 'thread-id'
+    #
+    # @api public
+    def subscribed?(*args)
+      arguments(args, required: [:id])
+
+      get_request("/notifications/threads/#{arguments.id}/subscription", arguments.params)
+    end
+
+    # Create a thread subscription
+    #
+    # This lets you subscribe to a thread, or ignore it. Subscribing to a thread
+    # is unnecessary if the user is already subscribed to the repository. Ignoring
+    # a thread will mute all future notifications (until you comment or get
+    # @mentioned).
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#set-a-thread-subscription
+    #
+    # @param [Hash] params
+    # @option params [Boolean] :subscribed
+    #   Determines if notifications should be received from this thread
+    # @option params [Boolean] :ignored
+    #   Determines if all notifications should be blocked from this thread
+    #
+    # @example
+    #   assembla = Assembla.new oauth_token: 'token'
+    #   assembla.activity.notifications.create 'thread-id',
+    #     subscribed: true
+    #     ignored: false
+    #
+    # @api public
+    def create(*args)
+      arguments(args, required: [:id])
+
+      put_request("/notifications/threads/#{arguments.id}/subscription", arguments.params)
+    end
+
+    # Delete a thread subscription
+    #
+    # @see https://developer.assembla.com/v3/activity/notifications/#delete-a-thread-subscription
+    #
+    # @example
+    #   assembla = Assembla.new oauth_token: 'token'
+    #   assembla.activity.notifications.delete 'thread_id'
+    #
+    # @api public
+    def delete(*args)
+      arguments(args, required: [:id])
+
+      delete_request("/notifications/threads/#{arguments.id}/subscription", arguments.params)
+    end
+    alias :remove :delete
+  end # Client::Activity::Notifications
+end # Assembla
