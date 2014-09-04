@@ -3,23 +3,13 @@
 module Assembla
   class Client::Activity < API
 
-    require_all 'assembla_api/client/activity',
-      'events',
-      'notifications',
-      'starring',
-      'watching'
+    def list(*args)
+      arguments(args)
 
-    # Access to Activity::Events API
-    namespace :events
-
-    # Access to Activity::Notifications API
-    namespace :notifications
-
-    # Access to Activity::Starring API
-    namespace :starring
-
-    # Access to Activity::Watching API
-    namespace :watching
+      response = get_request("/activity", arguments.params)
+      return response unless block_given?
+      response.each { |el| yield el }
+    end
 
   end # Activity
 end # Assembla

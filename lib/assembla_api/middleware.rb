@@ -16,6 +16,7 @@ module Assembla
         builder.use Faraday::Request::UrlEncoded
         builder.use Assembla::Request::OAuth2, api.oauth_token if api.oauth_token?
         builder.use Assembla::Request::BasicAuth, api.authentication if api.basic_authed?
+        builder.use Assembla::Request::KeyAuth, { api_key: api.api_key, api_secret: api.api_secret } if api.api_key?
 
         builder.use Faraday::Response::Logger if ENV['DEBUG']
         unless options[:raw]

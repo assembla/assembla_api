@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    github_api (0.12.1)
+    assembla_api (0.1.1)
       addressable (~> 2.3)
       descendants_tracker (~> 0.0.4)
       faraday (~> 0.8, < 0.10)
@@ -55,7 +55,7 @@ GEM
     guard-rspec (3.0.2)
       guard (>= 1.8)
       rspec (~> 2.13)
-    hashie (3.2.0)
+    hashie (3.3.1)
     jwt (1.0.0)
     listen (1.2.2)
       rb-fsevent (>= 0.9.3)
@@ -138,10 +138,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  assembla_api!
   bundler (~> 1.5)
   coveralls (~> 0.7.0)
   cucumber (~> 1.3)
-  github_api!
   growl
   growl_notify
   guard (~> 1.8.1)

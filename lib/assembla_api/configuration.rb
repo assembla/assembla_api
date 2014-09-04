@@ -21,11 +21,17 @@ module Assembla
     # By default, don't set an application secret
     property :client_secret
 
+    # By default, don't set an api key
+    property :api_key
+
+    # By default, don't set an api secret
+    property :api_secret
+
     # By default, don't set a user oauth access token
     property  :oauth_token
 
     # The api endpoint used to connect to Assembla if none is set
-    property  :endpoint, default: 'https://api.assembla.com'.freeze
+    property  :endpoint, default: 'https://api.assembla.com/v1'.freeze
 
     # The web endpoint used to connect to Assembla if none is set
     property  :site, default: 'https://www.assembla.com'.freeze

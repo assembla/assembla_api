@@ -10,8 +10,8 @@ module Assembla
       @client ||= ::OAuth2::Client.new(client_id, client_secret,
         {
           :site          => current_options.fetch(:site) { Assembla.site },
-          :authorize_url => 'login/oauth/authorize',
-          :token_url     => 'login/oauth/access_token',
+          :authorize_url => 'authorization',
+          :token_url     => 'token',
           :ssl           => { :verify => false }
         }
       )

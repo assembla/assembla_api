@@ -2,6 +2,7 @@
 
 require 'assembla_api/request/oauth2'
 require 'assembla_api/request/basic_auth'
+require 'assembla_api/request/key_auth'
 require 'assembla_api/request/jsonize'
 
 require 'assembla_api/connection'
