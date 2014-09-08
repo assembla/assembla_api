@@ -4,8 +4,8 @@ VCR.configure do |conf|
   conf.hook_into :webmock
   conf.cassette_library_dir = 'features/cassettes'
   conf.default_cassette_options = {
-    #:record => ENV['TRAVIS'] ? :none : :once,
-    :record => :all, # :new_episodes
+    :record => ENV['TRAVIS'] ? :none : :once,
+    #:record => :all, # :new_episodes
     :serialize_with => :json,
     :preserve_exact_body_bytes  => true,
     :decode_compressed_response => true
