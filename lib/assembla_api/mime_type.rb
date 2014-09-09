@@ -15,7 +15,7 @@ module Assembla
     # Parse media type param
     #
     def parse(media)
-      version = 'v3'
+      version = 'v1'
       media.sub!(/^[.]*|[.]*$/,"")
       media = media.include?('+') ? media.split('+')[0] : media
       version, media = media.split('.') if media.include?('.')
