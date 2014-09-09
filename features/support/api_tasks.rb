@@ -24,4 +24,9 @@ module ApiTasks
     @user_role = @user_role_api.create @space.wiki_name, user_role: {user_id: @dev1.id, role: 'member'}
     expect(@user_role.status).to eq 201
   end
+
+  def create_tool(tool_id)
+    @response = @tool = @tool_api.create @space.wiki_name, tool_id
+    expect(@tool.status).to eq 201
+  end
 end
