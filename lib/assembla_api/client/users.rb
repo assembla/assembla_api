@@ -22,7 +22,7 @@ module Assembla
     #
     # @example
     #  assembla = Assembla.new oauth_token: '...'
-    #  assembla.users.get
+    #  assembla.users.me
     #
     # @api public
     def get(*args)
@@ -34,24 +34,12 @@ module Assembla
         get_request("/user")
       end
     end
+
     alias :find :get
+    alias :me :get
 
     def picture(*args)
       # TODO implement
     end
-
-    # Get the authenticated user
-    #
-    # @example
-    #  assembla = Assembla.new oauth_token: '...'
-    #  assembla.users.me
-    #
-    # @api public
-    def me(*args)
-      params = arguments(args).params
-
-      get_request('/user')
-    end
-
   end # Users
 end # Assembla
