@@ -13,7 +13,7 @@ SETTINGS = (live_credentials? && File.exists?(settings_file) && yaml= YAML.load_
 
 Assembla.configure do |conf|
   conf.ssl = { verify: false }
-  conf.endpoint = 'https://www.breakout.tld/v1'
+  conf.endpoint = SETTINGS['endpoint'] if SETTINGS['endpoint']
   conf.api_key = SETTINGS['api_key']
   conf.api_secret = SETTINGS['api_secret']
 end
