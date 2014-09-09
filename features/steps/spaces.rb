@@ -2,7 +2,7 @@ class Spinach::Features::Spaces < Spinach::FeatureSteps
   include ApiTasks
 
   step 'I have "Assembla::Client::Spaces" instance' do
-    @instance = Assembla::Client::Spaces.new
+    @instance = @space_api = Assembla::Client::Spaces.new
   end
 
   step 'I make request with method create' do
@@ -31,10 +31,5 @@ class Spinach::Features::Spaces < Spinach::FeatureSteps
 
   step 'I make request with method delete' do
     @response = @instance.delete space: @space.wiki_name
-  end
-
-  step 'I have a space' do
-    @space = @instance.create name: 'api-test'
-    expect(@space.status).to eq 201
   end
 end

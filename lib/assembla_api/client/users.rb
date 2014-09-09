@@ -12,10 +12,10 @@ module Assembla
     # Access to Users::Keys API
     namespace :keys
 
-    # Get a single unauthenticated user
+    # Get a single user
     #
     # @example
-    #  assembla = Assembla.new
+    #  assembla = Assembla.new oauth_token: '...'
     #  assembla.users.get user: 'user-name'
     #
     # Get the authenticated user

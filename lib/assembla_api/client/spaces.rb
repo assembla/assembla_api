@@ -4,6 +4,7 @@ module Assembla
   class Client::Spaces < API
     # Load all the modules after initializing Repos to avoid superclass mismatch
     require_all 'assembla_api/client/spaces',
+      'user_roles',
       'users'
 
     VALID_PARAMS_NAMES = %w[
@@ -36,8 +37,11 @@ module Assembla
       'watcher_permissions' => [0, 1],
     }
 
-    # Access to Spaces::users API
+    # Access to Spaces::Users API
     namespace :users
+
+    # Access to Spaces::UserRoles API
+    namespace :user_roles
 
     #
     def my(*args)
