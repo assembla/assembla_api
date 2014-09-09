@@ -20,6 +20,33 @@ module Assembla
       response.each { |el| yield el }
     end
 
+    # api.spaces.user_roles.get 'project1', 150
+    def get(*args)
+      arguments(args, required: [:space, :user_role_id])
+      get_request("/spaces/#{arguments.space}/user_roles/#{arguments.user_role_id}", arguments.params)
+    end
+
+    alias :find :get
+
+    # api.spaces.user_roles.delete 'project1', 150
+    def delete(*args)
+      arguments(args, required: [:space, :user_role_id])
+      delete_request("/spaces/#{arguments.space}/user_roles/#{arguments.user_role_id}", arguments.params)
+    end
+
+    alias :remove :delete
+
+    # api.spaces.user_roles.edit 'project1', 150, user_role: { role: 'owner', title: 'Designer' }
+    def edit(*args)
+      arguments(args, required: [:space, :user_role_id]) do
+        permit VALID_PARAMS_NAMES, recursive: true
+        assert_required %w[ role ]
+        assert_values VALID_REQUEST_PARAM_VALUES
+      end
+
+      put_request("/spaces/#{arguments.space}/user_roles/#{arguments.user_role_id}", arguments.params)
+    end
+
     # api.spaces.user_roles.create 'project1', user_role: {user_id: UID, role: 'member'}
     def create(*args)
       arguments(args, required: [:space]) do
