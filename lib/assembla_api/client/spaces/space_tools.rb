@@ -1,9 +1,10 @@
 module Assembla
   class Client::Spaces::SpaceTools < API
     class ToolTypes
+      TICKETS  = 13
       MESSAGES = 21
       # TODO add all tools
-      ALL = [MESSAGES,]
+      ALL = [MESSAGES, TICKETS]
     end
 
     VALID_PARAMS_NAMES = %w{

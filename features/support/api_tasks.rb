@@ -8,14 +8,29 @@ module ApiTasks
   end
 
   step 'I have a space' do
+    @space_name ||= 'api-test'
     @space_api ||= Assembla::Client::Spaces.new
-    @space = @space_api.create name: 'api-test'
+    @space = @space_api.create name: @space_name
     expect(@space.status).to eq 201
   end
 
-  step 'I have user dev1' do
+  step 'I know my user ID' do
+    @current_user = user_api.me
+    expect(@current_user.status).to eq 200
+    @current_user_id = @current_user.id
+  end
+
+  def create_ticket(params)
+    @response = @ticket = @tickets_api.create @space.wiki_name, ticket: params
+    expect(@ticket.status).to eq 201
+  end
+
+  def user_api
     @user_api ||= Assembla::Client::Users.new
-    @dev1 = @user_api.get user: 'dev1'
+  end
+
+  step 'I have user dev1' do
+    @dev1 = user_api.get user: 'dev1'
     expect(@dev1.status).to eq 200
   end
 
@@ -25,7 +40,12 @@ module ApiTasks
     expect(@user_role.status).to eq 201
   end
 
+  step 'I have a ticket tool' do
+    create_tool 13
+  end
+
   def create_tool(tool_id)
+    @tool_api ||= Assembla::Client::Spaces::SpaceTools.new
     @response = @tool = @tool_api.create @space.wiki_name, tool_id
     expect(@tool.status).to eq 201
   end

@@ -5,6 +5,7 @@ module Assembla
     # Load all the modules after initializing Repos to avoid superclass mismatch
     require_all 'assembla_api/client/spaces',
       'space_tools',
+      'tickets',
       'user_roles',
       'users'
 
