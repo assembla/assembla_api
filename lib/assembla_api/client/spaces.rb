@@ -45,6 +45,9 @@ module Assembla
     # Access to Spaces::UserRoles API
     namespace :user_roles
 
+    # Access to Spaces::Tickets API
+    namespace :tickets
+
     #
     def my(*args)
       arguments(args)
