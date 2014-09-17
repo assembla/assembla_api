@@ -18,7 +18,7 @@ module Assembla
       accept = options[:headers] && options[:headers][:accept]
       {
         headers: {
-          ACCEPT         =>  accept || 'application/vnd.assembla.v3+json,' \
+          ACCEPT         =>  accept || 'application/vnd.assembla.v1+json,' \
                             'application/vnd.assembla.beta+json;q=0.5,' \
                             'application/json;q=0.1',
           ACCEPT_CHARSET => 'utf-8',

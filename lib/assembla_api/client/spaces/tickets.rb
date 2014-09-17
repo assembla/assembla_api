@@ -1,10 +1,12 @@
 module Assembla
   class Client::Spaces::Tickets < API
     require_all 'assembla_api/client/spaces/tickets',
+      'custom_fields'
       'statuses'
 
     # Access to Spaces::Tickets::Statuses API
     namespace :statuses
+    namespace :custom_fields
 
     VALID_PARAMS_NAMES = %w[
       summary
