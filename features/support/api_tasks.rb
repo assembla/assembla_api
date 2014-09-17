@@ -21,8 +21,10 @@ module ApiTasks
   end
 
   def create_ticket(params)
+    @tickets_api ||= Assembla::Client::Spaces::Tickets.new
     @response = @ticket = @tickets_api.create @space.wiki_name, ticket: params
     expect(@ticket.status).to eq 201
+    @ticket
   end
 
   def user_api
