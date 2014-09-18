@@ -10,8 +10,12 @@ module ApiTasks
   step 'I have a space' do
     @space_name ||= 'api-test'
     @space_api ||= Assembla::Client::Spaces.new
-    @space = @space_api.create name: @space_name
-    expect(@space.status).to eq 201
+    @space = @response = @space_api.create name: @space_name
+    assert_created
+  end
+
+  step 'I have a milestone' do
+    create_milestone
   end
 
   step 'I know my user ID' do
@@ -42,8 +46,8 @@ module ApiTasks
 
   step 'I invite dev1 to the space' do
     @user_role_api ||= Assembla::Client::Spaces::UserRoles.new
-    @user_role = @user_role_api.create @space.wiki_name, user_role: {user_id: @dev1.id, role: 'member'}
-    expect(@user_role.status).to eq 201
+    @user_role = @response = @user_role_api.create @space.wiki_name, user_role: {user_id: @dev1.id, role: 'member'}
+    assert_created
   end
 
   step 'I have a ticket tool' do
@@ -54,9 +58,15 @@ module ApiTasks
     @first_ticket = create_ticket summary: 'Make a plan for next project'
   end
 
+  def create_milestone(params = {})
+    @milestones_api ||= Assembla::Client::Spaces::Milestones.new
+    params[:title] ||= 'Backlog'
+    @milestone = @response = @milestones_api.create @space.wiki_name, milestone: params
+  end
+
   def create_tool(tool_id)
     @tool_api ||= Assembla::Client::Spaces::SpaceTools.new
     @response = @tool = @tool_api.create @space.wiki_name, tool_id
-    expect(@tool.status).to eq 201
+    assert_created
   end
 end

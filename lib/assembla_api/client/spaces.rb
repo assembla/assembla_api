@@ -6,6 +6,7 @@ module Assembla
     require_all 'assembla_api/client/spaces',
       'space_tools',
       'tickets',
+      'milestones',
       'user_roles',
       'users'
 

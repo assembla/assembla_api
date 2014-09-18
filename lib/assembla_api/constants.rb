@@ -54,6 +54,13 @@ module Assembla
 
     PARAM_START_PAGE = "start_page".freeze
 
+    class ToolTypes
+      MILESTONES = 9
+      TICKETS  = 13
+      MESSAGES = 21
+      # TODO add all tools
+      ALL = [MESSAGES, TICKETS, MILESTONES]
+    end
 
   end # Constants
 end # Assembla
