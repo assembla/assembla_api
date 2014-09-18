@@ -23,8 +23,12 @@ module ApiTasks
   def create_ticket(params)
     @tickets_api ||= Assembla::Client::Spaces::Tickets.new
     @response = @ticket = @tickets_api.create @space.wiki_name, ticket: params
-    expect(@ticket.status).to eq 201
+    assert_created
     @ticket
+  end
+
+  def assert_created
+    expect(@response.status).to eq 201
   end
 
   def user_api
@@ -44,6 +48,10 @@ module ApiTasks
 
   step 'I have a ticket tool' do
     create_tool 13
+  end
+
+  step 'I have a ticket' do
+    @first_ticket = create_ticket summary: 'Make a plan for next project'
   end
 
   def create_tool(tool_id)

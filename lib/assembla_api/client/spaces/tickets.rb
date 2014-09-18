@@ -3,12 +3,14 @@ module Assembla
     require_all 'assembla_api/client/spaces/tickets',
       'custom_fields',
       'associations',
+      'comments',
       'statuses'
 
     # Access to Spaces::Tickets::Statuses API
     namespace :statuses
     namespace :custom_fields
     namespace :associations
+    namespace :comments
 
     VALID_PARAMS_NAMES = %w[
       summary

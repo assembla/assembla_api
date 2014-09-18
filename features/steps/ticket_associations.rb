@@ -5,10 +5,6 @@ class Spinach::Features::TicketAssociations < Spinach::FeatureSteps
     create_association
   end
 
-  step 'I have a ticket' do
-    @first_ticket = create_ticket summary: 'Make a plan for next project'
-  end
-
   step 'I have another ticket' do
     create_another_ticket
   end

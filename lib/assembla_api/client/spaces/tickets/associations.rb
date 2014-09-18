@@ -37,7 +37,7 @@ module Assembla
       put_request("/spaces/#{arguments.space}/tickets/#{arguments.number}/ticket_associations/#{arguments.id}", arguments.params)
     end
 
-    # Delete ticket status by ID
+    # Delete ticket association by ID
     # @example
     # api.spaces.tickets.associations.delete 'project1', 500, 123
     def delete(*args)
