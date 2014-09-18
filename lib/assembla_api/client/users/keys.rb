@@ -12,12 +12,6 @@ module Assembla
     #  assembla.users.keys.list
     #  assembla.users.keys.list { |key| ... }
     #
-    # List public keys for the specified user
-    #
-    # @example
-    #  assembla.users.keys.list user: 'user-name'
-    #  assembla.users.keys.list user: 'user-name' { |key| ... }
-    #
     # @return [Hash]
     #
     # @api public
