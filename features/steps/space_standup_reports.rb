@@ -1,49 +1,42 @@
 class Spinach::Features::SpaceStandupReports < Spinach::FeatureSteps
-  step 'I make request with method create' do
-    pending 'step not implemented'
-  end
+  include ApiTasks
 
-  step 'the response status should be 201' do
-    pending 'step not implemented'
+  step 'I make request with method create' do
+    create_standup_report
   end
 
   step 'I have a standup report' do
-    pending 'step not implemented'
+    create_standup_report
+  end
+
+  def create_standup_report
+    @response = @standup = @instance.create @space.wiki_name,
+      standup_report: { what_id_did: 'Fixed s3 urls for utf8 files',
+        what_id_will_do: 'Write API and specs for documents,standup reports, etc'}
   end
 
   step 'I make request with method edit' do
-    pending 'step not implemented'
-  end
-
-  step 'the response status should be 204' do
-    pending 'step not implemented'
+    @response = @instance.edit @space.wiki_name,
+      standup_report: { roadblocks: 'Needs chef deployed on app servers'}
   end
 
   step 'I make request with method my' do
-    pending 'step not implemented'
-  end
-
-  step 'the response status should be 200' do
-    pending 'step not implemented'
+    @response = @instance.my @space.wiki_name
   end
 
   step 'I make request with method list' do
-    pending 'step not implemented'
+    @response = @instance.list @space.wiki_name
   end
 
-  step 'I have "Assembla::Client::Spaces::StandUpReports" instance' do
-    pending 'step not implemented'
+  step 'I have "Assembla::Client::Spaces::StandupReports" instance' do
+    @instance = Assembla::Client::Spaces::StandupReports.new
   end
 
   step 'I use different space name' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a space' do
-    pending 'step not implemented'
+    @space_name = 'StandUp Reports API'
   end
 
   step 'I have a standup tool' do
-    pending 'step not implemented'
+    create_tool 10
   end
 end

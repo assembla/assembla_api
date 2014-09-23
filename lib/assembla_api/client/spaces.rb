@@ -8,6 +8,7 @@ module Assembla
       'tickets',
       'milestones',
       'documents',
+      'standup_reports',
       'user_roles',
       'users'
 

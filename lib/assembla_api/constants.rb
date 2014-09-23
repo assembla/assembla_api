@@ -56,11 +56,12 @@ module Assembla
 
     class ToolTypes
       MILESTONES = 9
+      STANDUP = 10
       TICKETS  = 13
       FILES = 18
       MESSAGES = 21
       # TODO add all tools
-      ALL = [MESSAGES, TICKETS, MILESTONES, FILES]
+      ALL = [MESSAGES, TICKETS, MILESTONES, FILES, STANDUP]
     end
 
   end # Constants
