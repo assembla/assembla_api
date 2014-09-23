@@ -1,57 +1,47 @@
 class Spinach::Features::SpaceDocuments < Spinach::FeatureSteps
-  step 'I make request with method create' do
-    pending 'step not implemented'
-  end
+  include ApiTasks
 
-  step 'the response status should be 201' do
-    pending 'step not implemented'
+  step 'I make request with method create' do
+    create_document
   end
 
   step 'I have a document' do
-    pending 'step not implemented'
+    create_document
+  end
+
+  def create_document
+    @document = @response = @documents_api.create @space.wiki_name, document: {file: __FILE__ }
   end
 
   step 'I make request with method get' do
-    pending 'step not implemented'
-  end
-
-  step 'the response status should be 200' do
-    pending 'step not implemented'
+    @response = @instance.get @space.wiki_name, @document.id
   end
 
   step 'I make request with method download' do
-    pending 'step not implemented'
+    @response = @instance.download @space.wiki_name, @document.id
   end
 
   step 'I make request with method edit' do
-    pending 'step not implemented'
-  end
-
-  step 'the response status should be 204' do
-    pending 'step not implemented'
+    @response = @instance.edit @space.wiki_name, @document.id, document: { description: 'Was hard to obtain' }
   end
 
   step 'I make request with method delete' do
-    pending 'step not implemented'
+    @response = @instance.delete @space.wiki_name, @document.id
   end
 
   step 'I make request with method list' do
-    pending 'step not implemented'
+    @response = @instance.list @space.wiki_name
   end
 
   step 'I have "Assembla::Client::Spaces::Documents" instance' do
-    pending 'step not implemented'
+    @documents_api = @instance = Assembla::Client::Spaces::Documents.new
   end
 
   step 'I use specific space name' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a space' do
-    pending 'step not implemented'
+    @space_name = "Docs API"
   end
 
   step 'I have a files tool' do
-    pending 'step not implemented'
+    create_tool 18
   end
 end

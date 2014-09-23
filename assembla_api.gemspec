@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'hashie',      '>= 3.2'
   gem.add_dependency 'faraday',     '~> 0.8', '< 0.10'
   gem.add_dependency 'multi_json',  '>= 1.7.5', '< 2.0'
+  gem.add_dependency 'mime-types',  '>= 1.16', '< 3.0'
   gem.add_dependency 'oauth2'
   gem.add_dependency 'nokogiri',    '~> 1.6.3'
   gem.add_dependency 'descendants_tracker', '~> 0.0.4'

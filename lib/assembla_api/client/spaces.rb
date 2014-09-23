@@ -7,6 +7,7 @@ module Assembla
       'space_tools',
       'tickets',
       'milestones',
+      'documents',
       'user_roles',
       'users'
 

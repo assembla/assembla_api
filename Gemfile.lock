@@ -6,6 +6,7 @@ PATH
       descendants_tracker (~> 0.0.4)
       faraday (~> 0.8, < 0.10)
       hashie (>= 3.2)
+      mime-types (>= 1.16, < 3.0)
       multi_json (>= 1.7.5, < 2.0)
       nokogiri (~> 1.6.3)
       oauth2
