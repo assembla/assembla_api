@@ -1,57 +1,49 @@
 class Spinach::Features::SpaceStandupAwayReports < Spinach::FeatureSteps
-  step 'I make request with method create' do
-    pending 'step not implemented'
-  end
+  include ApiTasks
 
-  step 'the response status should be 201' do
-    pending 'step not implemented'
+  step 'I make request with method create' do
+    create_away_report
   end
 
   step 'I have a standup away report' do
-    pending 'step not implemented'
+    create_away_report
+  end
+
+  def create_away_report
+    @response = @standup = @instance.create @space.wiki_name,
+      standup_report: {
+        what_i_will_do: 'Will be away',
+        filled_for: @report_date.strftime
+      }
   end
 
   step 'I make request with method edit' do
-    pending 'step not implemented'
-  end
-
-  step 'the response status should be 204' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a standup report' do
-    pending 'step not implemented'
+    @response = @instance.edit @space.wiki_name,
+      standup_report: { what_i_will_do: 'I will take a vacation'},
+      date: @report_date.strftime
   end
 
   step 'I make request with method my' do
-    pending 'step not implemented'
-  end
-
-  step 'the response status should be 200' do
-    pending 'step not implemented'
+    @response = @instance.my @space.wiki_name, date: @report_date.strftime
   end
 
   step 'I make request with method list' do
-    pending 'step not implemented'
+    @response = @instance.list @space.wiki_name, date: @report_date.strftime
   end
 
-  step 'I have "Assembla::Client::Spaces::StandUpAwayReports" instance' do
-    pending 'step not implemented'
+  step 'I have "Assembla::Client::Spaces::StandupAwayReports" instance' do
+    @instance = Assembla::Client::Spaces::StandupAwayReports.new
   end
 
   step 'I use specific space name' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a space' do
-    pending 'step not implemented'
+    @space_name = 'Standup Away Reports'
   end
 
   step 'I have a standup tool' do
-    pending 'step not implemented'
+    create_tool 10
   end
 
   step 'I want to see/create away reports 7 days ahead' do
-    pending 'step not implemented'
+    @report_date = Date.today + 7
   end
 end

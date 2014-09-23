@@ -9,6 +9,7 @@ module Assembla
       'milestones',
       'documents',
       'standup_reports',
+      'standup_away_reports',
       'user_roles',
       'users'
 
