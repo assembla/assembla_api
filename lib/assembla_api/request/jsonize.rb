@@ -11,15 +11,18 @@ module Assembla
     dependency 'multi_json'
 
     def call(env)
-      if request_with_body?(env)
-        env[:request_headers][CONTENT_TYPE] ||= MIME_TYPE
-        env[:body] = encode_body env[:body] unless env[:body].respond_to?(:to_str)
-      else
-        # Ensure valid body for put and post requests
-        if [:put, :patch, :post].include? env[:method]
-          env[:body] = encode_body({})
+      unless env[:request_headers][CONTENT_TYPE].to_s =~ /^multipart/
+        if request_with_body?(env)
+          env[:request_headers][CONTENT_TYPE] ||= MIME_TYPE
+          env[:body] = encode_body env[:body] unless env[:body].respond_to?(:to_str)
+        else
+          # Ensure valid body for put and post requests
+          if [:put, :patch, :post].include? env[:method]
+            env[:body] = encode_body({})
+          end
         end
       end
+
       @app.call env
     end
 

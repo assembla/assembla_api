@@ -11,8 +11,8 @@ module Assembla
     def self.default(options = {})
       api = options[:api]
       proc do |builder|
-        builder.use Assembla::Request::Jsonize
         builder.use Faraday::Request::Multipart
+        builder.use Assembla::Request::Jsonize
         builder.use Faraday::Request::UrlEncoded
         builder.use Assembla::Request::OAuth2, api.oauth_token if api.oauth_token?
         builder.use Assembla::Request::BasicAuth, api.authentication if api.basic_authed?
