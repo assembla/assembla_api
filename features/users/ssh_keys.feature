@@ -2,6 +2,7 @@
 Feature: Ssh Keys
   Background:
     Given I have "Assembla::Client::Users::Keys" instance
+    And I have a generated ssh key
 
   Scenario: Create
     When I make request with method create

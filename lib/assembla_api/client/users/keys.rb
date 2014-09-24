@@ -3,7 +3,10 @@
 module Assembla
   class Client::Users::Keys < API
 
-    VALID_KEY_PARAM_NAMES = %w[ title key ].freeze
+    VALID_KEY_PARAM_NAMES = %w[ title key read_only ].freeze
+    VALID_REQUEST_PARAM_VALUES = {
+      'read_only' => [ true, false ],
+    }
 
     # List public keys for the authenticated user
     #
@@ -17,11 +20,7 @@ module Assembla
     # @api public
     def list(*args)
       params = arguments(args).params
-      response = if (user = params.delete('user'))
-        get_request("/users/#{user}/keys", params)
-      else
-        get_request("/user/keys", params)
-      end
+      response = get_request("/user/ssh_keys", params)
       return response unless block_given?
       response.each { |el| yield el }
     end
@@ -31,12 +30,12 @@ module Assembla
     #
     # @example
     #  assembla = Assembla.new oauth_token: '...'
-    #  assembla.users.keys.get 'key-id'
+    #  assembla.users.keys.get 571
     #
     # @api public
     def get(*args)
       arguments(args, required: [:id])
-      get_request("/user/keys/#{arguments.id}", arguments.params)
+      get_request("/user/ssh_keys/#{arguments.id}", arguments.params)
     end
     alias :find :get
 
@@ -50,14 +49,15 @@ module Assembla
     #
     # @example
     #  assembla = Assembla.new oauth_token: '...'
-    #  assembla.users.keys.create "title": "buildbot@octomac", "key": "ssh-rsa AAA..."
+    #  assembla.users.keys.create ssh_key: {title: "buildbot@mac", key: "ssh-rsa AAA..."}
     #
     # @api public
     def create(*args)
       arguments(args) do
-        permit VALID_KEY_PARAM_NAMES
+        permit VALID_KEY_PARAM_NAMES, recursive: true
+        assert_values VALID_REQUEST_PARAM_VALUES
       end
-      post_request("/user/keys", arguments.params)
+      post_request("/user/ssh_keys", arguments.params)
     end
 
     # Update a public key for the authenticated user
@@ -70,27 +70,28 @@ module Assembla
     #
     # @example
     #  assembla = Assembla.new oauth_token: '...'
-    #  assembla.users.keys.update 'key-id', "title": "buildbot@octomac",
+    #  assembla.users.keys.update 571, "title": "buildbot@mac",
     #    "key": "ssh-rsa AAA..."
     #
     # @api public
-    def update(*args)
+    def edit(*args)
       arguments(args, required: [:id]) do
-        permit VALID_KEY_PARAM_NAMES
+        permit VALID_KEY_PARAM_NAMES, recursive: true
+        assert_values VALID_REQUEST_PARAM_VALUES
       end
-      patch_request("/user/keys/#{arguments.id}", arguments.params)
+      put_request("/user/ssh_keys/#{arguments.id}", arguments.params)
     end
 
     # Delete a public key for the authenticated user
     #
     # @example
     #  assembla = Assembla.new oauth_token: '...'
-    #  assembla.users.keys.delete 'key-id'
+    #  assembla.users.keys.delete 571
     #
     # @api public
     def delete(*args)
       arguments(args, required: [:id])
-      delete_request("/user/keys/#{arguments.id}", arguments.params)
+      delete_request("/user/ssh_keys/#{arguments.id}", arguments.params)
     end
   end # Users::Keys
 end # Assembla
