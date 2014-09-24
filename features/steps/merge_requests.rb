@@ -9,10 +9,6 @@ class Spinach::Features::MergeRequests < Spinach::FeatureSteps
     i_have_a_merge_request
   end
 
-  step 'I have a merge request' do
-    create_mr
-  end
-
   step 'I make request with method ignore' do
     @response = @instance.ignore @space.wiki_name, @git_tool.id, @mr.id
   end

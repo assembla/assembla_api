@@ -71,4 +71,9 @@ module GitTasks
   step 'I have a git tool' do
     @git_tool = create_tool 128
   end
+
+  step 'I have a merge request' do
+    create_mr
+  end
+
 end

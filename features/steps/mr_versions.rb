@@ -1,49 +1,32 @@
 class Spinach::Features::MrVersions < Spinach::FeatureSteps
-  step 'I make request with method list' do
-    pending 'step not implemented'
-  end
+  include GitTasks
 
-  step 'the response status should be 200' do
-    pending 'step not implemented'
+  step 'I make request with method list' do
+    @response = @instance.list @space.wiki_name, @git_tool.id, @mr.id
   end
 
   step 'I make request with method get' do
-    pending 'step not implemented'
+    @response = @instance.get @space.wiki_name, @git_tool.id, @mr.id, 1
   end
 
   step 'I push new changes to a dev branch' do
-    pending 'step not implemented'
+    Dir.chdir @git_dir do
+      GitSSHWrapper.with_wrapper(:private_key_path => data_root.join('api_test')) do |wrapper|
+        wrapper.set_env
+        run_cmd "git push -q origin i2014a:i2014"
+      end
+    end
   end
 
   step 'I make request with method create' do
-    pending 'step not implemented'
+    @response = @instance.create @space.wiki_name, @git_tool.id, @mr.id
   end
 
-  step 'the response status should be 201' do
-    pending 'step not implemented'
-  end
-
-  step 'I have "Assembla::Client::Spaces::MergeRequests::Versions" instance' do
-    pending 'step not implemented'
+  step 'I have "Assembla::Client::Spaces::SpaceTools::MergeRequests::Versions" instance' do
+    @instance = Assembla::Client::Spaces::SpaceTools::MergeRequests::Versions.new
   end
 
   step 'I use specific space name' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a space' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a git tool' do
-    pending 'step not implemented'
-  end
-
-  step 'I have two git branches' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a merge request' do
-    pending 'step not implemented'
+    @space_name = 'MRV'# + Time.now.strftime('%Y%m%d %H%M')
   end
 end

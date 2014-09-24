@@ -1,5 +1,9 @@
 module Assembla
   class Client::Spaces::SpaceTools::MergeRequests < API
+    require_all 'assembla_api/client/spaces/space_tools/merge_requests',
+      'versions'
+
+    namespace :versions
 
     VALID_PARAMS_NAMES = %w{
       description
