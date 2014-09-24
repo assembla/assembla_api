@@ -1,10 +1,12 @@
 @api
 Feature: Merge Requests
   Background:
-    Given I have "Assembla::Client::Spaces::MergeRequests" instance
+    Given I have "Assembla::Client::Spaces::SpaceTools::MergeRequests" instance
     And I use specific space name
     And I have a space
     And I have a git tool
+    And I have a ssh key uploaded
+    And git tool is ready
     And I have two git branches
 
   Scenario: Create
@@ -16,6 +18,7 @@ Feature: Merge Requests
     And I make request with method ignore
     Then the response status should be 204
 
+  @live
   Scenario: Merge
     When I have a merge request
     And I make request with method merge
@@ -31,6 +34,7 @@ Feature: Merge Requests
     And I make request with method list
     Then the response status should be 200
 
+  @wip
   Scenario: Comments
     When I have a merge request
     And I comment on MR

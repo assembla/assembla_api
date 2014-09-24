@@ -68,5 +68,6 @@ module ApiTasks
     @tool_api ||= Assembla::Client::Spaces::SpaceTools.new
     @response = @tool = @tool_api.create @space.wiki_name, tool_id
     assert_created
+    @tool
   end
 end

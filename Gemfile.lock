@@ -42,6 +42,7 @@ GEM
     ffi (1.9.3)
     formatador (0.2.5)
     gherkin-ruby (0.3.2)
+    git-ssh-wrapper (0.2.0)
     growl (1.0.3)
     growl_notify (0.0.3)
       rb-appscript
@@ -159,6 +160,7 @@ DEPENDENCIES
   assembla_api!
   bundler (~> 1.5)
   coveralls
+  git-ssh-wrapper
   growl
   growl_notify
   guard

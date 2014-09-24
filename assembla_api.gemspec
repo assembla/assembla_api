@@ -25,5 +25,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'bundler', '~> 1.5'
   gem.add_development_dependency 'sshkey'
-
+  gem.add_development_dependency 'git-ssh-wrapper'
 end

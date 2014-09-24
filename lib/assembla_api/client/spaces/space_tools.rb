@@ -1,5 +1,9 @@
 module Assembla
   class Client::Spaces::SpaceTools < API
+    require_all 'assembla_api/client/spaces/space_tools',
+      'merge_requests'
+
+    namespace :merge_requests
 
     VALID_PARAMS_NAMES = %w{
       team_permissions

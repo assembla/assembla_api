@@ -2,7 +2,6 @@
 
 module Assembla
   class Client::Spaces < API
-    # Load all the modules after initializing Repos to avoid superclass mismatch
     require_all 'assembla_api/client/spaces',
       'space_tools',
       'tickets',
@@ -51,6 +50,12 @@ module Assembla
 
     # Access to Spaces::Tickets API
     namespace :tickets
+
+    namespace :milestones
+    namespace :documents
+    namespace :space_tools
+    namespace :standup_reports
+    namespace :standup_away_reports
 
     #
     def my(*args)

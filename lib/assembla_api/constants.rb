@@ -60,8 +60,9 @@ module Assembla
       TICKETS  = 13
       FILES = 18
       MESSAGES = 21
+      GIT = 128
       # TODO add all tools
-      ALL = [MESSAGES, TICKETS, MILESTONES, FILES, STANDUP]
+      ALL = [MESSAGES, TICKETS, MILESTONES, FILES, STANDUP, GIT]
     end
 
   end # Constants
