@@ -76,4 +76,9 @@ module GitTasks
     create_mr
   end
 
+  def create_mr_comment
+    @mr_comments_api ||= Assembla::Client::Spaces::SpaceTools::MergeRequests::Versions::Comments.new
+    @response = @mr_comments_api.create @space.wiki_name, @git_tool.id, @mr.id, 1, content: 'Looks good to me.'
+    assert_created
+  end
 end

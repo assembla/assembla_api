@@ -34,7 +34,6 @@ Feature: Merge Requests
     And I make request with method list
     Then the response status should be 200
 
-  @wip
   Scenario: Comments
     When I have a merge request
     And I comment on MR

@@ -1,10 +1,12 @@
 @api
 Feature: MR Versions Comments
   Background:
-    Given I have "Assembla::Client::Spaces::MergeRequests::Versions::Comments" instance
+    Given I have "Assembla::Client::Spaces::SpaceTools::MergeRequests::Versions::Comments" instance
     And I use specific space name
     And I have a space
     And I have a git tool
+    And I have a ssh key uploaded
+    And git tool is ready
     And I have two git branches
     And I have a merge request
 

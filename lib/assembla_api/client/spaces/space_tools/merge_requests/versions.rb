@@ -1,5 +1,9 @@
 module Assembla
   class Client::Spaces::SpaceTools::MergeRequests::Versions < API
+    require_all 'assembla_api/client/spaces/space_tools/merge_requests/versions',
+      'comments'
+
+    namespace :comments
 
     # @example
     # api.spaces.space_tools.merge_requests.versions.create 'project1', 'git', 7

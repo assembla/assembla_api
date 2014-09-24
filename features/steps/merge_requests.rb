@@ -26,8 +26,7 @@ class Spinach::Features::MergeRequests < Spinach::FeatureSteps
   end
 
   step 'I comment on MR' do
-    # TODO needs MRV API
-    pending 'step not implemented'
+    create_mr_comment
   end
 
   step 'I make request with method comments' do
