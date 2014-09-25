@@ -9,12 +9,6 @@ class Spinach::Features::SpaceStandupReports < Spinach::FeatureSteps
     create_standup_report
   end
 
-  def create_standup_report
-    @response = @standup = @instance.create @space.wiki_name,
-      standup_report: { what_id_did: 'Fixed s3 urls for utf8 files',
-        what_id_will_do: 'Write API and specs for documents,standup reports, etc'}
-  end
-
   step 'I make request with method edit' do
     @response = @instance.edit @space.wiki_name,
       standup_report: { roadblocks: 'Needs chef deployed on app servers'}
@@ -29,14 +23,10 @@ class Spinach::Features::SpaceStandupReports < Spinach::FeatureSteps
   end
 
   step 'I have "Assembla::Client::Spaces::StandupReports" instance' do
-    @instance = Assembla::Client::Spaces::StandupReports.new
+    @standup_api = @instance = Assembla::Client::Spaces::StandupReports.new
   end
 
   step 'I use different space name' do
     @space_name = 'StandUp Reports API'
-  end
-
-  step 'I have a standup tool' do
-    create_tool 10
   end
 end

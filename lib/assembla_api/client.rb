@@ -4,6 +4,7 @@ module Assembla
   class Client < API
 
     require_all 'assembla_api/client',
+      'portfolio',
       'activity',
       'spaces',
       'tasks',

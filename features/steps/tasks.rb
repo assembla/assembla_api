@@ -5,10 +5,6 @@ class Spinach::Features::Tasks < Spinach::FeatureSteps
     i_have_a_task
   end
 
-  step 'I have a task' do
-    @task = @response = @instance.create task: { description: 'Finished Tasks API tests', space_id: @space.id }
-  end
-
   step 'I make request with method get' do
     @response = @instance.get @task.id
   end
@@ -26,7 +22,7 @@ class Spinach::Features::Tasks < Spinach::FeatureSteps
   end
 
   step 'I have "Assembla::Client::Tasks" instance' do
-    @instance = Assembla::Client::Tasks.new
+    @tasks_api = @instance = Assembla::Client::Tasks.new
   end
 
   step 'I use specific space name' do

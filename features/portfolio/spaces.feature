@@ -1,9 +1,8 @@
 @api
-Feature: Portfolio Tasks
+Feature: Portfolio Spaces
   Background:
-    Given I have "Assembla::Client::Portfolio::Tasks" instance
+    Given I have "Assembla::Client::Portfolio::Spaces" instance
     And I have a space
-    And I have a task
 
   Scenario: List
     When I make request with method list

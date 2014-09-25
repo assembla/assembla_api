@@ -62,12 +62,48 @@ module ApiTasks
     create_tool Assembla::Constants::ToolTypes::WIKI
   end
 
+  step 'I have a standup tool' do
+    create_tool 10
+  end
+
+  def create_standup_report(params = {})
+    report = {
+      what_id_did: 'Fixed s3 urls for utf8 files',
+      what_id_will_do: 'Write API and specs for documents,standup reports, etc'
+    }.update(params)
+
+    @standup_api ||= Assembla::Client::Spaces::StandupReports.new
+    @response = @standup = @standup_api.create @space.wiki_name, standup_report: report
+  end
+
   step 'I have a wiki page' do
     @wiki_api ||= Assembla::Client::Spaces::WikiPages.new
 
     params = { page_name: 'Setup', contents: 'TODO' }
     params.update(@wiki_params) if @wiki_params
     @wiki = @response = @wiki_api.create @space.wiki_name, wiki_page: params
+  end
+
+  step 'I have a task' do
+    @tasks_api ||= Assembla::Client::Tasks.new
+    @task = @response = @tasks_api.create task: { description: 'Finished Tasks API tests', space_id: @space.id }
+  end
+
+  step 'I have a standup away report' do
+    create_away_report
+  end
+
+  def create_away_report
+    @standup_away_api ||= Assembla::Client::Spaces::StandupAwayReports.new
+    @response = @standup = @standup_away_api.create @space.wiki_name,
+      standup_report: {
+        what_i_will_do: 'Will be away',
+        filled_for: @report_date.strftime
+      }
+  end
+
+  step 'I want to see/create away reports 7 days ahead' do
+    @report_date = Date.today + 7
   end
 
   def create_milestone(params = {})
