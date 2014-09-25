@@ -8,7 +8,8 @@ Feature: Wiki Pages Versions
     And I have a wiki page
 
   Scenario: Get
-    When I make request with method get
+    When I know first version ID
+    And I make request with method get
     Then the response status should be 200
 
   Scenario: List

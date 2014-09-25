@@ -1,5 +1,7 @@
 module Assembla
   class Client::Spaces::WikiPages < API
+    require_all 'assembla_api/client/spaces/wiki_pages',
+      'versions'
 
     VALID_PARAMS_NAMES = %w[
       page_name
