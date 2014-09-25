@@ -58,6 +58,18 @@ module ApiTasks
     @first_ticket = create_ticket summary: 'Make a plan for next project'
   end
 
+  step 'I have a wiki tool' do
+    create_tool Assembla::Constants::ToolTypes::WIKI
+  end
+
+  step 'I have a wiki page' do
+    @wiki_api ||= Assembla::Client::Spaces::WikiPages.new
+
+    params = { page_name: 'Setup', contents: 'TODO' }
+    params.update(@wiki_params) if @wiki_params
+    @wiki = @response = @wiki_api.create @space.wiki_name, wiki_page: params
+  end
+
   def create_milestone(params = {})
     @milestones_api ||= Assembla::Client::Spaces::Milestones.new
     params[:title] ||= 'Backlog'

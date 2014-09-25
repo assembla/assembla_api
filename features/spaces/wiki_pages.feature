@@ -26,7 +26,8 @@ Feature: Wiki Pages
     Then the response status should be 204
 
   Scenario: Delete Container
-    When I have a child wiki page
+    When I have a wiki page
+    And I have a child wiki page
     And I make request with method delete container
     Then the response status should be 204
 
