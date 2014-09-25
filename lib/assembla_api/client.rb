@@ -12,6 +12,7 @@ module Assembla
 
     namespace :activity
     namespace :spaces
+    namespace :portfolio
 
     # Many of the resources on the users API provide a shortcut for getting
     # information about the currently authenticated user.
