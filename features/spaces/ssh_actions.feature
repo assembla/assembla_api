@@ -26,10 +26,9 @@ Feature: SSH Actions
     And I make request with method delete
     Then the response status should be 204
 
-  @wip
   Scenario: Run
     When I have a ssh action
-    And space has ssh key
+    And I have a space ssh key
     And I make request with method run
     Then the response status should be 200
 

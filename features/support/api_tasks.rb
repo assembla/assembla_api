@@ -123,6 +123,12 @@ module ApiTasks
     create_tool Assembla::Constants::ToolTypes::SSH
   end
 
+  step 'I have a space ssh key' do
+    @space_ssh_key_api ||= Assembla::Client::Spaces::Ssh::Keys.new
+    @response = @space_ssh_key_api.generate @space.wiki_name
+    assert_created
+  end
+
   step 'I have a ssh server' do
     @ssh_srv_api ||= Assembla::Client::Spaces::Ssh::Servers.new
 

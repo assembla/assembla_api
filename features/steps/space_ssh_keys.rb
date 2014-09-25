@@ -14,7 +14,7 @@ class Spinach::Features::SpaceSshKeys < Spinach::FeatureSteps
   end
 
   step 'I have "Assembla::Client::Spaces::Ssh::Keys" instance' do
-    @instance = Assembla::Client::Spaces::Ssh::Keys.new
+    @space_ssh_key_api = @instance = Assembla::Client::Spaces::Ssh::Keys.new
   end
 
   step 'I use specific space name' do
