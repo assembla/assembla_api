@@ -2,6 +2,8 @@
 Feature: Tasks
   Background:
     Given I have "Assembla::Client::Tasks" instance
+    And I use specific space name
+    And I have a space
 
   Scenario: Create
     When I make request with method create

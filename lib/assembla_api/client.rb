@@ -6,6 +6,7 @@ module Assembla
     require_all 'assembla_api/client',
       'activity',
       'spaces',
+      'tasks',
       'users'
 
     namespace :activity
