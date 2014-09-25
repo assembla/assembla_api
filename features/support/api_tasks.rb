@@ -118,4 +118,20 @@ module ApiTasks
     assert_created
     @tool
   end
+
+  step 'I have a ssh tool' do
+    create_tool Assembla::Constants::ToolTypes::SSH
+  end
+
+  step 'I have a ssh server' do
+    @ssh_srv_api ||= Assembla::Client::Spaces::Ssh::Servers.new
+
+    @server = @response = @ssh_srv_api.create @space.wiki_name,
+      ssh_server: {
+        name: 'Stage',
+        remote_host: 'localhost', remote_port: 22
+      }
+
+    assert_created
+  end
 end

@@ -1,10 +1,11 @@
 @api
 Feature: SSH Actions
   Background:
-    Given I have "Assembla::Client::Spaces::SshActions" instance
+    Given I have "Assembla::Client::Spaces::Ssh::Actions" instance
     And I use specific space name
     And I have a space
     And I have a ssh tool
+    And I have a ssh server
 
   Scenario: Create
     When I make request with method create
@@ -25,8 +26,10 @@ Feature: SSH Actions
     And I make request with method delete
     Then the response status should be 204
 
+  @wip
   Scenario: Run
     When I have a ssh action
+    And space has ssh key
     And I make request with method run
     Then the response status should be 200
 
