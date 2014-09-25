@@ -1,7 +1,7 @@
 @api
 Feature: SSH Servers
   Background:
-    Given I have "Assembla::Client::Spaces::SshServers" instance
+    Given I have "Assembla::Client::Spaces::Ssh::Servers" instance
     And I use specific space name
     And I have a space
     And I have a ssh tool

@@ -63,8 +63,11 @@ module Assembla
       WIKI = 23
       WEBHOOKS = 112
       GIT = 128
+      SSH = 200
       # TODO add all tools
-      ALL = [ MESSAGES, TICKETS, MILESTONES, FILES, STANDUP, GIT, WIKI, WEBHOOKS ]
+      ALL = [ MESSAGES, TICKETS, MILESTONES, FILES, STANDUP, GIT, WIKI, WEBHOOKS,
+        SSH
+       ]
     end
 
   end # Constants
