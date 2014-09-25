@@ -3,6 +3,7 @@ module Assembla
 
     # @example
     # api.spaces.space_tools.merge_requests.versions.comments.create 'project1', 'git', 571, 1,
+    #    content: 'Looks good to me'
     def create(*args)
       fields = %w[ content ]
       arguments(args, required: [:space, :space_tool, :mr_id, :version]) do

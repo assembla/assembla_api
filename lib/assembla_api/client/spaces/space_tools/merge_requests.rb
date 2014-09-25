@@ -4,6 +4,7 @@ module Assembla
       'versions'
 
     namespace :versions
+    namespace :votes
 
     VALID_PARAMS_NAMES = %w{
       description

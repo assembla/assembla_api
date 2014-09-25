@@ -1,6 +1,7 @@
 module Assembla
   class Client::Spaces::SpaceTools::MergeRequests::Versions < API
     require_all 'assembla_api/client/spaces/space_tools/merge_requests/versions',
+      'votes',
       'comments'
 
     namespace :comments
