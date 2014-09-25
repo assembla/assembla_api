@@ -1,41 +1,39 @@
 class Spinach::Features::Webhooks < Spinach::FeatureSteps
-  step 'I make request with method create' do
-    pending 'step not implemented'
-  end
+  include ApiTasks
 
-  step 'the response status should be 201' do
-    pending 'step not implemented'
+  step 'I make request with method create' do
+    i_have_a_webhook
   end
 
   step 'I have a webhook' do
-    pending 'step not implemented'
+    @hook = @response = @instance.create @space.wiki_name,
+      webhook: {
+        enabled: false, title: 'Sync', external_url: 'https://google.com/search?q=how',
+        http_method: 1,
+        content_type: 'text/html'
+      }
+    assert_created
+    # FIXME remove we fix: https://www.assembla.com/spaces/breakout/tickets/25714-api--fix-webhook-create-to-return-json-without-namespace#/activity/ticket:
+    @hook = @hook.webhook
   end
 
   step 'I make request with method edit' do
-    pending 'step not implemented'
-  end
-
-  step 'the response status should be 204' do
-    pending 'step not implemented'
+    @response = @instance.edit @space.wiki_name, @hook.id, webhook: { title: 'Better sync' }
   end
 
   step 'I make request with method delete' do
-    pending 'step not implemented'
+    @response = @instance.delete @space.wiki_name, @hook.id
   end
 
   step 'I have "Assembla::Client::Spaces::Webhooks" instance' do
-    pending 'step not implemented'
+    @instance = Assembla::Client::Spaces::Webhooks.new
   end
 
   step 'I use different space name' do
-    pending 'step not implemented'
-  end
-
-  step 'I have a space' do
-    pending 'step not implemented'
+    @space_name = 'Webhooks API'
   end
 
   step 'I have a webhook tool' do
-    pending 'step not implemented'
+    create_tool Assembla::Constants::ToolTypes::WEBHOOKS
   end
 end

@@ -15,6 +15,7 @@ Feature: Webhooks
     And I make request with method edit
     Then the response status should be 204
 
+  @wip @bug25715
   Scenario: Delete
     When I have a webhook
     And I make request with method delete

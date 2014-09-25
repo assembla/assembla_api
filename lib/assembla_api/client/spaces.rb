@@ -8,6 +8,7 @@ module Assembla
       'milestones',
       'documents',
       'wiki_pages',
+      'webhooks',
       'standup_reports',
       'standup_away_reports',
       'user_roles',
@@ -55,6 +56,7 @@ module Assembla
     namespace :milestones
     namespace :documents
     namespace :wiki_pages
+    namespace :webhooks
     namespace :space_tools
     namespace :standup_reports
     namespace :standup_away_reports
