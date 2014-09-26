@@ -58,8 +58,23 @@ module ApiTasks
     @first_ticket = create_ticket summary: 'Make a plan for next project'
   end
 
+  step 'I have a files tool' do
+    create_tool 18
+  end
+
+  step 'I have a document' do
+    @documents_api ||= Assembla::Client::Spaces::Documents.new
+    @doc_params ||= {}
+    params = {file: __FILE__ }.merge(@doc_params)
+    @document = @response = @documents_api.create @space.wiki_name, document: params
+  end
+
   step 'I have a wiki tool' do
     create_tool Assembla::Constants::ToolTypes::WIKI
+  end
+
+  step 'I have a milestone tool' do
+    create_tool Assembla::Constants::ToolTypes::MILESTONES
   end
 
   step 'I have a standup tool' do

@@ -38,8 +38,4 @@ class Spinach::Features::SpaceMilestones < Spinach::FeatureSteps
   step 'I use different space name' do
     @space_name = 'Milestones API'
   end
-
-  step 'I have a milestone tool' do
-    create_tool Assembla::Constants::ToolTypes::MILESTONES
-  end
 end

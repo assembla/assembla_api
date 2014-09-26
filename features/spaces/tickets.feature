@@ -35,9 +35,9 @@ Feature: Space Tickets
     And I make request with method list
     Then the response status should be 200
 
-  @wip
   Scenario: Attachments
-    When I have a ticket
+    When I have a files tool
+    And I have a ticket
     And It has an attachment
     And I make request with method attachments
     Then the response status should be 200
@@ -47,11 +47,10 @@ Feature: Space Tickets
     And I make request with method tags
     Then the response status should be 200
 
-  @wip
   Scenario: Custom Reports
     When I have a custom report
     And I make request with method custom reports
-    Then the response status should be 200
+    Then the response status should be 204
 
   Scenario: My Tickets
     When I know my user ID
@@ -64,9 +63,9 @@ Feature: Space Tickets
     And I make request with method followed
     Then the response status should be 200
 
-  @wip
   Scenario: Tickets by Milestone
-    When I have a current milestone
+    When I have a milestone tool
+    And I have a current milestone
     And I have a ticket with milestone current
     And I make request with method by_milestone_id
     Then the response status should be 200

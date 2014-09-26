@@ -2,15 +2,7 @@ class Spinach::Features::SpaceDocuments < Spinach::FeatureSteps
   include ApiTasks
 
   step 'I make request with method create' do
-    create_document
-  end
-
-  step 'I have a document' do
-    create_document
-  end
-
-  def create_document
-    @document = @response = @documents_api.create @space.wiki_name, document: {file: __FILE__ }
+    i_have_a_document
   end
 
   step 'I make request with method get' do
@@ -39,9 +31,5 @@ class Spinach::Features::SpaceDocuments < Spinach::FeatureSteps
 
   step 'I use specific space name' do
     @space_name = "Docs API"
-  end
-
-  step 'I have a files tool' do
-    create_tool 18
   end
 end

@@ -16,7 +16,7 @@ module Assembla
     ].freeze
 
     VALID_REQUEST_PARAM_VALUES = {
-      'attachable_type' => /^(ticket|flow|milestone)$/i
+      'attachable_type' => /^(Ticket|Flow|Milestone)$/
     }
 
     # @example

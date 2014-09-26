@@ -18,19 +18,20 @@ class Spinach::Features::SpaceTickets < Spinach::FeatureSteps
   end
 
   step 'It has an attachment' do
-    pending 'step not implemented'
+    @doc_params = { attachable_id: @ticket.id, attachable_type: 'Ticket' }
+    i_have_a_document
   end
 
   step 'I have a current milestone' do
-    pending 'step not implemented'
+    create_milestone
   end
 
   step 'I have a ticket with milestone current' do
-    pending 'step not implemented'
+    create_ticket summary: 'Backlog ticket', milestone_id: @milestone.id
   end
 
   step 'I have a custom report' do
-    pending 'step not implemented'
+    # There is no way to create custom report with API
   end
 
   step 'I make request with method create' do
@@ -66,7 +67,7 @@ class Spinach::Features::SpaceTickets < Spinach::FeatureSteps
   end
 
   step 'I make request with method custom reports' do
-    pending 'step not implemented'
+    @response = @instance.custom_reports @space.wiki_name
   end
 
   step 'I make request with method my' do
@@ -78,7 +79,7 @@ class Spinach::Features::SpaceTickets < Spinach::FeatureSteps
   end
 
   step 'I make request with method by_milestone_id' do
-    @response = @instance.by_milestone_id @space.wiki_name
+    @response = @instance.by_milestone_id @space.wiki_name, @milestone.id
   end
 
   step 'I make request with method without_milestone' do
