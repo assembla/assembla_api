@@ -140,4 +140,17 @@ module ApiTasks
 
     assert_created
   end
+
+  step 'I have a ssh action' do
+    @ssh_actions_api ||= Assembla::Client::Spaces::Ssh::Actions.new
+    @ssh_action = @response = @ssh_actions_api.create @space.wiki_name,
+      ssh_action: {
+        username: 'deploy', command: 'ls -la',
+        ssh_tool_server_id: @server.id, name: 'Breakout' }
+  end
+
+  step 'I run ssh action' do
+    @response = @ssh_actions_api.run @space.wiki_name, @ssh_action.id
+    expect(@response.status).to eq 200
+  end
 end

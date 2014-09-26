@@ -1,5 +1,9 @@
 module Assembla
   class Client::Spaces::Ssh::Actions < API
+    require_all 'assembla_api/client/spaces/ssh/actions',
+      'launches'
+    namespace :launches
+
     VALID_PARAMS_NAMES = %w[
       name
       command

@@ -11,3 +11,5 @@ log
 features/settings.yml
 test.log
 tmp
+.DS_Store
+

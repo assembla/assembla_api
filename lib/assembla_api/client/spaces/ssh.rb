@@ -3,10 +3,12 @@ module Assembla
     require_all 'assembla_api/client/spaces/ssh',
       'keys',
       'servers',
-      'actions'
+      'actions',
+      'launches'
 
     namespace :keys
     namespace :servers
     namespace :actions
+    namespace :launches
   end
 end
