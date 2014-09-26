@@ -5,6 +5,7 @@ module Assembla
     require_all 'assembla_api/client/spaces',
       'space_tools',
       'tickets',
+      'tags',
       'milestones',
       'documents',
       'wiki_pages',
@@ -53,7 +54,7 @@ module Assembla
 
     # Access to Spaces::Tickets API
     namespace :tickets
-
+    namespace :tags
     namespace :milestones
     namespace :documents
     namespace :wiki_pages
