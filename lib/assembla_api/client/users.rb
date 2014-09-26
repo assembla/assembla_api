@@ -38,8 +38,12 @@ module Assembla
     alias :find :get
     alias :me :get
 
+    # @example
+    #  api.users.picture 'mike'
     def picture(*args)
-      # TODO implement
+      arguments(args, required: [ :user ])
+      arguments.params['raw'] = true
+      get_request("/users/#{arguments.user}/picture", arguments.params)
     end
   end # Users
 end # Assembla

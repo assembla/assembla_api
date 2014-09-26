@@ -11,3 +11,7 @@ Feature: Users
     When I have user dev1
     And I make request with method get for user dev1
     Then the response status should be 200
+
+  Scenario: Picture
+    When I make request with method picture for me
+    Then the response status should be 200

@@ -9,6 +9,10 @@ class Spinach::Features::Users < Spinach::FeatureSteps
     @response = @instance.get user: 'dev1'
   end
 
+  step 'I make request with method picture for me' do
+    @response = @instance.picture 'mike'
+  end
+
   step 'I have "Assembla::Client::Users" instance' do
     @instance = @user_api = Assembla::Client::Users.new
   end
