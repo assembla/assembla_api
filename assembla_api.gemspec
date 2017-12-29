@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'multi_json',  '>= 1.7.5', '< 2.0'
   gem.add_dependency 'mime-types',  '>= 1.16', '< 3.0'
   gem.add_dependency 'oauth2'
-  gem.add_dependency 'nokogiri',    '~> 1.6.3'
+  gem.add_dependency 'nokogiri',    '~> 1.8.1'
   gem.add_dependency 'descendants_tracker', '~> 0.0.4'
 
   gem.add_development_dependency 'bundler', '~> 1.5'
